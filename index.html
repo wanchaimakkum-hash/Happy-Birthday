@@ -12,7 +12,7 @@
 body{
   margin:0;
   font-family:'Sarabun', sans-serif;
-  background:linear-gradient(135deg,#ffe4ec,#ffffff);
+  background:linear-gradient(135deg,#ffe6ef,#ffffff);
   color:#ff5c8a;
   text-align:center;
   overflow-x:hidden;
@@ -29,8 +29,8 @@ body{
   max-width:560px;
   background:#ffffff;
   border-radius:30px;
-  padding:30px 26px;
-  box-shadow:0 24px 48px rgba(255,92,138,.35);
+  padding:34px 26px;
+  box-shadow:0 25px 50px rgba(255,92,138,.35);
 }
 .hidden{display:none}
 
@@ -39,18 +39,30 @@ h1,h2{
 }
 p{
   font-family:'Sriracha', cursive;
-  line-height:1.8;
+  line-height:1.9;
 }
 
-input,button{
+/* input + button */
+input{
+  width:100%;
+  padding:14px;
+  border-radius:18px;
+  border:2px solid #ffd1dc;
+  font-size:1.05em;
+  margin-top:16px;
+  outline:none;
+}
+input:focus{
+  border-color:#ff9ab3;
+  box-shadow:0 0 0 4px rgba(255,154,179,.25);
+}
+button{
   width:100%;
   padding:14px;
   border-radius:18px;
   border:none;
   font-size:1.05em;
-  margin-top:14px;
-}
-button{
+  margin-top:16px;
   background:linear-gradient(135deg,#ff9ab3,#ff5c8a);
   color:#fff;
 }
@@ -62,7 +74,7 @@ button{
   color:#ff9ab3;
 }
 
-/* หัวใจลอย */
+/* floating hearts */
 .heart{
   position:fixed;
   bottom:-20px;
@@ -77,12 +89,12 @@ button{
 /* section */
 .section{
   background:#fff7fa;
-  padding:20px;
-  border-radius:24px;
+  padding:22px;
+  border-radius:26px;
   margin:22px 0;
 }
 
-/* ไพ่ซ้อน */
+/* card stack */
 .card-slider{
   position:relative;
   width:100%;
@@ -101,12 +113,10 @@ button{
   object-fit:cover;
   box-shadow:0 16px 36px rgba(255,92,138,.35);
   transition:.45s;
-  touch-action:pan-y;
 }
 .card-img.prev{
   transform:translateX(-120%) scale(.9) rotate(-4deg);
   opacity:.4;
-  z-index:1;
 }
 .card-img.active{
   transform:translateX(-50%) scale(1);
@@ -116,20 +126,16 @@ button{
 .card-img.next{
   transform:translateX(20%) scale(.9) rotate(4deg);
   opacity:.4;
-  z-index:2;
 }
-.card-img.hidden{
-  opacity:0;
-  z-index:0;
-}
+.card-img.hidden{opacity:0}
 
-/* ของขวัญ */
+/* gift */
 .gift-title{
   font-family:'Sriracha', cursive;
   font-size:2em;
 }
 .gift-box{
-  width:380px;
+  width:400px;
   max-width:95%;
   margin:22px auto;
   display:block;
@@ -145,7 +151,7 @@ button{
 /* note */
 .note{
   background:#fff0f6;
-  padding:22px;
+  padding:24px;
   border-radius:26px;
   margin-top:20px;
 }
@@ -165,99 +171,87 @@ button{
 </head>
 <body>
 
-<!-- หน้าใส่รหัส -->
+<!-- LOCK -->
 <div id="lock" class="wrap">
   <div class="card">
-    <h1>ใส่รหัสของเรา 💕</h1>
-    <p>วันพิเศษที่จำไม่เคยลืม</p>
-    <input id="pw" type="password">
+    <h1>ใส่รหัสของพี่กับหนู 💕</h1>
+    <p style="opacity:.8">วันพิเศษที่พี่ไม่เคยลืมเลย</p>
+    <input id="pw" type="password" placeholder="รหัสความทรงจำของเรา">
     <button onclick="unlock()">เปิดเซอร์ไพรส์</button>
     <p id="err"></p>
   </div>
 </div>
 
-<!-- หน้าเนื้อหา -->
+<!-- CONTENT -->
 <div id="content" class="wrap hidden">
   <div class="card">
 
-    <h1>สุขสันต์วันเกิดนะที่รัก 🎂</h1>
-    <p style="opacity:.8">สำหรับคนพิเศษที่สุดในชีวิต 💗</p>
+    <h1>สุขสันต์วันเกิดนะคนเก่งของพี่ 🎂</h1>
+    <p style="opacity:.8">
+      ขอบคุณที่อยู่ข้างพี่  
+      ในทุกวันธรรมดาที่กลายเป็นวันพิเศษ 💖
+    </p>
 
     <div class="divider">✿ ✿ ✿</div>
 
     <div class="section">
       <p>
-        ขอบคุณทุกวันที่อยู่ข้างกัน<br>
-        ทุกความทรงจำที่ผ่านมา<br>
-        แม่งโคตรมีค่าเลย 💖
+        ตลอดเวลาที่ผ่านมา  
+        หนูคือรอยยิ้ม คือกำลังใจ  
+        และคือเหตุผลที่ทำให้พี่อยากตื่นมาในทุก ๆ วัน  
+        พี่รักหนูนะ… รักมากขึ้นทุกวันเลย 🤍
       </p>
     </div>
 
     <div class="divider">💗 💗 💗</div>
 
-    <!-- ไพ่ซ้อน 22 รูป -->
+    <!-- PHOTOS -->
     <div class="section">
-      <p style="font-size:.95em;opacity:.8">ปัดซ้าย–ขวาดูรูปของเรา 📸</p>
+      <p style="opacity:.8">ปัดดูความทรงจำของเรา 📸</p>
       <div class="card-slider" id="slider">
-        <img src="img1.jpg"  class="card-img">
-        <img src="img2.jpg"  class="card-img">
-        <img src="img3.jpg"  class="card-img">
-        <img src="img4.jpg"  class="card-img">
-        <img src="img5.jpg"  class="card-img">
-        <img src="img6.jpg"  class="card-img">
-        <img src="img7.jpg"  class="card-img">
-        <img src="img8.jpg"  class="card-img">
-        <img src="img9.jpg"  class="card-img">
-        <img src="img10.jpg" class="card-img">
-        <img src="img11.jpg" class="card-img">
-        <img src="img12.jpg" class="card-img">
-        <img src="img13.jpg" class="card-img">
-        <img src="img14.jpg" class="card-img">
-        <img src="img15.jpg" class="card-img">
-        <img src="img16.jpg" class="card-img">
-        <img src="img17.jpg" class="card-img">
-        <img src="img18.jpg" class="card-img">
-        <img src="img19.jpg" class="card-img">
-        <img src="img20.jpg" class="card-img">
-        <img src="img21.jpg" class="card-img">
-        <img src="img22.jpg" class="card-img">
+        <script>
+          for(let i=1;i<=22;i++){
+            document.write(`<img src="img${i}.jpg" class="card-img">`);
+          }
+        </script>
       </div>
     </div>
 
-    <!-- เพลง -->
+    <!-- MUSIC -->
     <audio id="music" loop>
       <source src="song.mp3" type="audio/mpeg">
     </audio>
 
     <div class="divider">✿ ✿ ✿</div>
 
-    <!-- ของขวัญ -->
+    <!-- GIFT -->
     <div class="section">
-      <div class="gift-title">ของขวัญปีนี้ 🎁</div>
-      <p style="font-size:.9em;opacity:.75">แตะดูสิ… กูตั้งใจมากนะ</p>
+      <div class="gift-title">ของขวัญจากพี่ 🎁</div>
+      <p style="opacity:.75">อาจจะช้าไปหน่อย… แต่ตั้งใจมากนะ</p>
       <img src="gift-box.png" id="giftBox" class="gift-box" onclick="openGift()">
       <div id="giftImg" class="note hidden">
         <img src="gift.jpg" style="width:100%;border-radius:18px;">
       </div>
     </div>
 
-    <!-- วิดีโอ (loop + mute ไม่ชนเพลง) -->
+    <!-- VIDEO -->
     <div class="section">
-      <video id="video" width="100%" autoplay muted loop playsinline style="border-radius:20px;">
+      <video id="video" width="100%" autoplay muted loop playsinline style="border-radius:22px;">
         <source src="video.MP4" type="video/mp4">
       </video>
     </div>
 
-    <!-- กล่องข้อความ -->
-    <button onclick="toggleNote()">เปิดอ่านข้อความจากใจ 💌</button>
+    <!-- NOTE -->
+    <button onclick="toggleNote()">อ่านข้อความจากหัวใจพี่ 💌</button>
     <div id="noteBox" class="note hidden">
-      ขอบคุณที่เข้ามาเป็นทุกอย่างในชีวิตกู  
-      ขอให้ปีนี้เป็นปีที่มีแต่รอยยิ้ม  
-      และมีกูอยู่ข้างๆ แบบนี้ตลอดไป 💕
+      พี่อาจไม่เก่งคำพูด  
+      แต่ทุกอย่างที่พี่ทำ… พี่ทำเพราะหนู  
+      ขอให้ทุกวันของหนูมีรอยยิ้ม  
+      และมีพี่อยู่ข้าง ๆ แบบนี้ตลอดไปนะ 🤍
     </div>
 
     <p style="margin-top:30px;font-size:.9em;opacity:.7">
-      จากใจคนที่รักมึงเสมอ 🤍
+      จากพี่… คนที่รักหนูที่สุด 💞
     </p>
 
   </div>
@@ -265,11 +259,10 @@ button{
 
 <script>
 const PASSWORD="181205";
-let heartInterval;
+let hearts;
 
-/* หัวใจลอย */
 function startHearts(){
-  heartInterval=setInterval(()=>{
+  hearts=setInterval(()=>{
     const h=document.createElement("div");
     h.className="heart";
     h.innerText="💗";
@@ -280,22 +273,21 @@ function startHearts(){
 }
 startHearts();
 
-/* unlock */
 function unlock(){
   if(pw.value===PASSWORD){
-    clearInterval(heartInterval);
+    clearInterval(hearts);
     lock.classList.add("hidden");
     content.classList.remove("hidden");
     music.play().catch(()=>{});
     video.play().catch(()=>{});
-  }else err.innerText="รหัสไม่ถูก 😉";
+  }else err.innerText="รหัสยังไม่ถูกนะ ลองใหม่อีกที 💕";
 }
 
-/* card slider */
-const cards=document.querySelectorAll('.card-img');
+/* slider */
+const cards=()=>document.querySelectorAll('.card-img');
 let current=0;
 function updateCards(){
-  cards.forEach((c,i)=>{
+  cards().forEach((c,i)=>{
     c.className='card-img';
     if(i===current)c.classList.add('active');
     else if(i===current-1)c.classList.add('prev');
@@ -303,16 +295,14 @@ function updateCards(){
     else c.classList.add('hidden');
   });
 }
-updateCards();
+setTimeout(updateCards,100);
 
 let startX=0;
-slider.addEventListener('touchstart',e=>{
-  startX=e.touches[0].clientX;
-});
+slider.addEventListener('touchstart',e=>startX=e.touches[0].clientX);
 slider.addEventListener('touchend',e=>{
-  const endX=e.changedTouches[0].clientX;
-  if(endX<startX-50 && current<cards.length-1)current++;
-  if(endX>startX+50 && current>0)current--;
+  let endX=e.changedTouches[0].clientX;
+  if(endX<startX-50&&current<cards().length-1)current++;
+  if(endX>startX+50&&current>0)current--;
   updateCards();
 });
 
@@ -321,17 +311,13 @@ function openGift(){
   giftBox.classList.add("shake");
   setTimeout(()=>{
     giftBox.classList.remove("shake");
-    confetti();
     giftImg.classList.toggle("hidden");
+    confetti();
   },600);
 }
-
-/* note */
 function toggleNote(){
   noteBox.classList.toggle("hidden");
 }
-
-/* confetti */
 function confetti(){
   for(let i=0;i<30;i++){
     const c=document.createElement("div");

@@ -26,8 +26,11 @@ body{
   background:rgba(0,0,0,.25);
   border-radius:20px;
   padding:24px;
+  box-shadow:0 20px 40px rgba(0,0,0,.25);
 }
 .hidden{display:none}
+h1{margin:0 0 10px}
+p{line-height:1.7}
 input,button{
   width:100%;
   padding:14px;
@@ -41,21 +44,20 @@ button{
   color:#fff;
   cursor:pointer;
 }
-p{line-height:1.7}
-img{
+.slider{margin:16px 0}
+.fade-img{
   width:100%;
   border-radius:16px;
+  transition: opacity 1s ease-in-out;
 }
-.slider{
-  position:relative;
-  margin:16px 0;
-}
+.fade-out{opacity:0}
 .secret{
   margin-top:16px;
   background:rgba(255,255,255,.15);
   padding:14px;
   border-radius:12px;
 }
+.footer{margin-top:12px;opacity:.9}
 </style>
 </head>
 <body>
@@ -63,8 +65,8 @@ img{
 <!-- หน้าใส่รหัส -->
 <div id="lock" class="wrap">
   <div class="card">
-    <h1>Happy birthday to you 💕</h1>
-    <p>รหัสผ่านของคุณคือวันเกิดตัวเอง</p>
+    <h1>ใส่รหัสของเรา 💕</h1>
+    <p>Hint: วันพิเศษที่จำไม่เคยลืม</p>
     <input id="pw" type="password" placeholder="ใส่รหัสผ่าน">
     <button onclick="unlock()">เปิดเซอร์ไพรส์</button>
     <p id="err"></p>
@@ -83,9 +85,11 @@ img{
     </p>
 
     <!-- สไลด์รูป -->
-   <img src="photo.jpg" style="width:100%;border-radius:16px;">
+    <div class="slider">
+      <img id="slide" src="img1.jpg" class="fade-img">
+    </div>
 
-    <!-- เพลง (เล่นอัตโนมัติหลังใส่รหัส) -->
+    <!-- เพลง (เล่นอัตโนมัติหลังปลดล็อก) -->
     <audio id="music" loop>
       <source src="song.mp3" type="audio/mpeg">
     </audio>
@@ -97,22 +101,30 @@ img{
       สุขสันต์วันเกิดนะ รักเสมอ ❤️
     </div>
 
-    <p style="margin-top:12px;">แฮปปี้เบิร์ดเดย์นะมีความสุขมากๆ 💖</p>
+    <p class="footer">รักมึงเสมอ 💖</p>
   </div>
 </div>
 
 <script>
 const PASSWORD = "181205";
-const images = ["img1.jpg","img2.jpg","img3.jpg"];
+const images = [
+  "img1.jpg","img2.jpg","img3.jpg","img4.jpg","img5.jpg",
+  "img6.jpg","img7.jpg","img8.jpg","img9.jpg","img10.jpg",
+  "img11.jpg","img12.jpg","img13.jpg","img14.jpg","img15.jpg",
+  "img16.jpg","img17.jpg","img18.jpg","img19.jpg","img20.jpg",
+  "img21.jpg","img22.jpg"
+];
 let index = 0;
+let sliderStarted = false;
 
 function unlock(){
   const v = document.getElementById("pw").value;
   if(v === PASSWORD){
     document.getElementById("lock").classList.add("hidden");
     document.getElementById("content").classList.remove("hidden");
-    document.getElementById("music").play(); // เล่นเพลงหลังปลดล็อก
-    startSlide();
+    const music = document.getElementById("music");
+    music.play().catch(()=>{});
+    if(!sliderStarted){ startSlide(); sliderStarted = true; }
   }else{
     document.getElementById("err").innerText = "รหัสไม่ถูก ลองใหม่อีกทีนะ 😉";
   }
@@ -120,9 +132,15 @@ function unlock(){
 
 function startSlide(){
   setInterval(()=>{
-    index = (index + 1) % images.length;
-    document.getElementById("slide").src = images[index];
-  },3000);
+    const img = document.getElementById("slide");
+    if(!img) return;
+    img.classList.add("fade-out");
+    setTimeout(()=>{
+      index = (index + 1) % images.length;
+      img.src = images[index];
+      img.classList.remove("fade-out");
+    },1000);
+  },4000);
 }
 
 function toggleSecret(){

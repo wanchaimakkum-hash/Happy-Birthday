@@ -46,7 +46,7 @@ button{
   color:#fff;
 }
 
-/* สไลด์ */
+/* สไลด์รูป */
 .slider{margin:16px 0}
 .fade-img{
   width:100%;
@@ -58,14 +58,14 @@ button{
 /* ข้อความของขวัญ */
 .gift-title{
   font-family:'Playfair Display', serif;
-  font-size:1.6em;
-  margin-top:20px;
-  text-align:center;          /* ⭐️ สำคัญ */
+  font-size:1.7em;
+  margin-top:22px;
+  text-align:center;
   background:linear-gradient(45deg,#ffd700,#ff9a9e);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
-.gift-sub{margin-bottom:10px}
+.gift-sub{margin-bottom:12px}
 .emoji-float{
   display:inline-block;
   animation:float 2s ease-in-out infinite;
@@ -78,15 +78,14 @@ button{
 
 /* กล่องของขวัญ */
 .gift-box-img{
-  width:240px;               /* ⭐️ ใหญ่ขึ้น */
-  max-width:80%;
-  display:block;             /* ⭐️ จัดกลาง */
-  margin:20px auto;
+  width:280px;
+  max-width:90%;
+  display:block;
+  margin:26px auto;
   cursor:pointer;
+  filter:drop-shadow(0 12px 24px rgba(255,215,0,.45));
 }
-.shake{
-  animation:shake 0.6s;
-}
+.shake{animation:shake .6s}
 @keyframes shake{
   0%{transform:translateX(0)}
   25%{transform:translateX(-6px)}
@@ -95,12 +94,12 @@ button{
   100%{transform:translateX(0)}
 }
 
-/* กล่องเซอร์ไพรส์ */
+/* รูปเซอร์ไพรส์ */
 .secret{
   margin-top:16px;
   background:rgba(255,255,255,.15);
   padding:14px;
-  border-radius:12px;
+  border-radius:14px;
 }
 
 /* คอนเฟตตี้ */
@@ -109,11 +108,11 @@ button{
   top:-10px;
   width:8px;
   height:14px;
-  opacity:0.9;
+  opacity:.9;
   animation:fall 2.5s linear forwards;
 }
 @keyframes fall{
-  to{transform:translateY(110vh) rotate(360deg); opacity:0;}
+  to{transform:translateY(110vh) rotate(360deg);opacity:0}
 }
 </style>
 </head>
@@ -122,8 +121,8 @@ button{
 <!-- หน้าใส่รหัส -->
 <div id="lock" class="wrap">
   <div class="card">
-    <h1>รหัสคือวันเกิด 💕</h1>
-    <p>Happy birthday to you </p>
+    <h1>ใส่รหัสของเรา 💕</h1>
+    <p>HAPPY</p>
     <input id="pw" type="password" placeholder="ใส่รหัสผ่าน">
     <button onclick="unlock()">เปิดเซอร์ไพรส์</button>
     <p id="err"></p>
@@ -134,14 +133,13 @@ button{
 <div id="content" class="wrap hidden">
   <div class="card">
     <h1>สุขสันต์วันเกิดนะที่รัก 🎂</h1>
-
     <p>
-      ขอบคุณทุกวันที่อยู่ข้างกัน  
-      ทุกความทรงจำตลอด 5 ปีที่ผ่านมา  
+      ขอบคุณทุกวันที่อยู่ข้างกัน<br>
+      ทุกความทรงจำตลอด 5 ปีที่ผ่านมา<br>
       แม่งโคตรมีค่าเลย ❤️
     </p>
 
-    <!-- สไลด์ -->
+    <!-- สไลด์รูป -->
     <div class="slider">
       <img id="slide" src="img1.jpg" class="fade-img">
     </div>
@@ -153,14 +151,19 @@ button{
 
     <!-- กล่องของขวัญ -->
     <div class="gift-title">
-        ของขวัญปีนี้ 
+      ของขวัญปีนี้
       <span class="emoji-float">🎁</span>
       <span class="emoji-float">✨</span>
     </div>
     <div class="gift-sub">แตะที่กล่องสิ 💖</div>
 
-    <img id="giftBoxImg" src="gift-box.png" class="gift-box-img" onclick="openGift()">
+    <!-- กล่อง (PNG) -->
+    <img id="giftBoxImg"
+         src="gift-box.png"
+         class="gift-box-img"
+         onclick="openGift()">
 
+    <!-- รูปเซอร์ไพรส์ -->
     <div id="giftReveal" class="secret hidden">
       <img src="gift.jpg" style="width:100%;border-radius:16px;">
     </div>
@@ -201,25 +204,17 @@ function startSlide(){
   },4000);
 }
 
-/* กล่องสั่น + คอนเฟตตี้ + เปิดแล้วปิดกลับ */
 function openGift(){
   const box=document.getElementById("giftBoxImg");
   box.classList.add("shake");
-
   setTimeout(()=>{
     box.classList.remove("shake");
     launchConfetti();
     giftReveal.classList.remove("hidden");
-
-    // ปิดกลับเองหลัง 3 วิ
-    setTimeout(()=>{
-      giftReveal.classList.add("hidden");
-    },3000);
-
+    setTimeout(()=>giftReveal.classList.add("hidden"),3000);
   },600);
 }
 
-/* คอนเฟตตี้ */
 function launchConfetti(){
   for(let i=0;i<30;i++){
     const c=document.createElement("div");

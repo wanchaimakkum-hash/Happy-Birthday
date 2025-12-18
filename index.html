@@ -28,25 +28,38 @@ body{
   width:100%;
   max-width:560px;
   background:#ffffff;
-  border-radius:28px;
-  padding:28px;
-  box-shadow:0 20px 40px rgba(255,92,138,.35);
+  border-radius:30px;
+  padding:30px 26px;
+  box-shadow:0 24px 48px rgba(255,92,138,.35);
 }
 .hidden{display:none}
-h1{font-family:'Sriracha', cursive}
-p{font-family:'Sriracha', cursive; line-height:1.8}
+
+h1,h2{
+  font-family:'Sriracha', cursive;
+}
+p{
+  font-family:'Sriracha', cursive;
+  line-height:1.8;
+}
 
 input,button{
   width:100%;
   padding:14px;
-  border-radius:16px;
+  border-radius:18px;
   border:none;
   font-size:1.05em;
-  margin-top:12px;
+  margin-top:14px;
 }
 button{
   background:linear-gradient(135deg,#ff9ab3,#ff5c8a);
   color:#fff;
+}
+
+/* divider */
+.divider{
+  margin:26px 0;
+  font-size:22px;
+  color:#ff9ab3;
 }
 
 /* หัวใจลอย */
@@ -61,32 +74,64 @@ button{
   to{transform:translateY(-120vh);opacity:0}
 }
 
-/* รูปเลื่อนเอง */
-.stack{
-  display:flex;
-  gap:12px;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
+/* section */
+.section{
+  background:#fff7fa;
+  padding:20px;
+  border-radius:24px;
   margin:22px 0;
 }
-.stack img{
-  flex:0 0 80%;
-  height:420px;
-  border-radius:24px;
+
+/* ไพ่ซ้อน */
+.card-slider{
+  position:relative;
+  width:100%;
+  height:460px;
+  perspective:1200px;
+  overflow:hidden;
+}
+.card-img{
+  position:absolute;
+  top:0;
+  left:50%;
+  width:85%;
+  height:100%;
+  transform:translateX(-50%);
+  border-radius:26px;
   object-fit:cover;
-  scroll-snap-align:center;
+  box-shadow:0 16px 36px rgba(255,92,138,.35);
+  transition:.45s;
+  touch-action:pan-y;
+}
+.card-img.prev{
+  transform:translateX(-120%) scale(.9) rotate(-4deg);
+  opacity:.4;
+  z-index:1;
+}
+.card-img.active{
+  transform:translateX(-50%) scale(1);
+  opacity:1;
+  z-index:3;
+}
+.card-img.next{
+  transform:translateX(20%) scale(.9) rotate(4deg);
+  opacity:.4;
+  z-index:2;
+}
+.card-img.hidden{
+  opacity:0;
+  z-index:0;
 }
 
 /* ของขวัญ */
 .gift-title{
   font-family:'Sriracha', cursive;
   font-size:2em;
-  margin-top:26px;
 }
 .gift-box{
-  width:360px;           /* ใหญ่ขึ้น */
+  width:380px;
   max-width:95%;
-  margin:24px auto;
+  margin:22px auto;
   display:block;
   cursor:pointer;
 }
@@ -97,16 +142,15 @@ button{
   75%{transform:translateX(-6px)}
 }
 
-/* กล่อง */
+/* note */
 .note{
-  margin-top:20px;
   background:#fff0f6;
-  padding:20px;
-  border-radius:22px;
-  font-family:'Sriracha', cursive;
+  padding:22px;
+  border-radius:26px;
+  margin-top:20px;
 }
 
-/* คอนเฟตตี้ */
+/* confetti */
 .confetti{
   position:fixed;
   top:-10px;
@@ -125,7 +169,7 @@ button{
 <div id="lock" class="wrap">
   <div class="card">
     <h1>ใส่รหัสของเรา 💕</h1>
-    <p>H</p>
+    <p>วันพิเศษที่จำไม่เคยลืม</p>
     <input id="pw" type="password">
     <button onclick="unlock()">เปิดเซอร์ไพรส์</button>
     <p id="err"></p>
@@ -135,21 +179,49 @@ button{
 <!-- หน้าเนื้อหา -->
 <div id="content" class="wrap hidden">
   <div class="card">
+
     <h1>สุขสันต์วันเกิดนะที่รัก 🎂</h1>
+    <p style="opacity:.8">สำหรับคนพิเศษที่สุดในชีวิต 💗</p>
 
-    <p>
-      ขอบคุณทุกวันที่อยู่ข้างกัน<br>
-      ทุกความทรงจำที่ผ่านมา<br>
-      แม่งโคตรมีค่าเลย 💖
-    </p>
+    <div class="divider">✿ ✿ ✿</div>
 
-    <!-- รูปเลื่อนเอง -->
-    <div class="stack">
-      <img src="img1.jpg">
-      <img src="img2.jpg">
-      <img src="img3.jpg">
-      <img src="img4.jpg">
-      <img src="img5.jpg">
+    <div class="section">
+      <p>
+        ขอบคุณทุกวันที่อยู่ข้างกัน<br>
+        ทุกความทรงจำที่ผ่านมา<br>
+        แม่งโคตรมีค่าเลย 💖
+      </p>
+    </div>
+
+    <div class="divider">💗 💗 💗</div>
+
+    <!-- ไพ่ซ้อน 22 รูป -->
+    <div class="section">
+      <p style="font-size:.95em;opacity:.8">ปัดซ้าย–ขวาดูรูปของเรา 📸</p>
+      <div class="card-slider" id="slider">
+        <img src="img1.jpg"  class="card-img">
+        <img src="img2.jpg"  class="card-img">
+        <img src="img3.jpg"  class="card-img">
+        <img src="img4.jpg"  class="card-img">
+        <img src="img5.jpg"  class="card-img">
+        <img src="img6.jpg"  class="card-img">
+        <img src="img7.jpg"  class="card-img">
+        <img src="img8.jpg"  class="card-img">
+        <img src="img9.jpg"  class="card-img">
+        <img src="img10.jpg" class="card-img">
+        <img src="img11.jpg" class="card-img">
+        <img src="img12.jpg" class="card-img">
+        <img src="img13.jpg" class="card-img">
+        <img src="img14.jpg" class="card-img">
+        <img src="img15.jpg" class="card-img">
+        <img src="img16.jpg" class="card-img">
+        <img src="img17.jpg" class="card-img">
+        <img src="img18.jpg" class="card-img">
+        <img src="img19.jpg" class="card-img">
+        <img src="img20.jpg" class="card-img">
+        <img src="img21.jpg" class="card-img">
+        <img src="img22.jpg" class="card-img">
+      </div>
     </div>
 
     <!-- เพลง -->
@@ -157,28 +229,36 @@ button{
       <source src="song.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- ของขวัญ -->
-    <div class="gift-title">ของขวัญปีนี้ 🎁</div>
-    <img src="gift-box.png" id="giftBox" class="gift-box" onclick="openGift()">
+    <div class="divider">✿ ✿ ✿</div>
 
-    <div id="giftImg" class="note hidden">
-      <img src="gift.jpg" style="width:100%;border-radius:18px;">
+    <!-- ของขวัญ -->
+    <div class="section">
+      <div class="gift-title">ของขวัญปีนี้ 🎁</div>
+      <p style="font-size:.9em;opacity:.75">แตะดูสิ… กูตั้งใจมากนะ</p>
+      <img src="gift-box.png" id="giftBox" class="gift-box" onclick="openGift()">
+      <div id="giftImg" class="note hidden">
+        <img src="gift.jpg" style="width:100%;border-radius:18px;">
+      </div>
     </div>
 
-    <!-- วิดีโอ -->
-    <div class="note">
-      <video id="video" width="100%" autoplay muted playsinline style="border-radius:18px;">
+    <!-- วิดีโอ (loop + mute ไม่ชนเพลง) -->
+    <div class="section">
+      <video id="video" width="100%" autoplay muted loop playsinline style="border-radius:20px;">
         <source src="video.MP4" type="video/mp4">
       </video>
     </div>
 
-    <!-- กล่องข้อความ (ล่างสุด) -->
-    <button onclick="toggleNote()">เปิดอ่านข้อความ 💌</button>
+    <!-- กล่องข้อความ -->
+    <button onclick="toggleNote()">เปิดอ่านข้อความจากใจ 💌</button>
     <div id="noteBox" class="note hidden">
       ขอบคุณที่เข้ามาเป็นทุกอย่างในชีวิตกู  
-      ขอให้ปีนี้เป็นปีที่มีความสุข  
-      และมีกูอยู่ข้างๆ เสมอ 💕
+      ขอให้ปีนี้เป็นปีที่มีแต่รอยยิ้ม  
+      และมีกูอยู่ข้างๆ แบบนี้ตลอดไป 💕
     </div>
+
+    <p style="margin-top:30px;font-size:.9em;opacity:.7">
+      จากใจคนที่รักมึงเสมอ 🤍
+    </p>
 
   </div>
 </div>
@@ -187,6 +267,7 @@ button{
 const PASSWORD="181205";
 let heartInterval;
 
+/* หัวใจลอย */
 function startHearts(){
   heartInterval=setInterval(()=>{
     const h=document.createElement("div");
@@ -199,6 +280,7 @@ function startHearts(){
 }
 startHearts();
 
+/* unlock */
 function unlock(){
   if(pw.value===PASSWORD){
     clearInterval(heartInterval);
@@ -209,6 +291,32 @@ function unlock(){
   }else err.innerText="รหัสไม่ถูก 😉";
 }
 
+/* card slider */
+const cards=document.querySelectorAll('.card-img');
+let current=0;
+function updateCards(){
+  cards.forEach((c,i)=>{
+    c.className='card-img';
+    if(i===current)c.classList.add('active');
+    else if(i===current-1)c.classList.add('prev');
+    else if(i===current+1)c.classList.add('next');
+    else c.classList.add('hidden');
+  });
+}
+updateCards();
+
+let startX=0;
+slider.addEventListener('touchstart',e=>{
+  startX=e.touches[0].clientX;
+});
+slider.addEventListener('touchend',e=>{
+  const endX=e.changedTouches[0].clientX;
+  if(endX<startX-50 && current<cards.length-1)current++;
+  if(endX>startX+50 && current>0)current--;
+  updateCards();
+});
+
+/* gift */
 function openGift(){
   giftBox.classList.add("shake");
   setTimeout(()=>{
@@ -218,10 +326,12 @@ function openGift(){
   },600);
 }
 
+/* note */
 function toggleNote(){
   noteBox.classList.toggle("hidden");
 }
 
+/* confetti */
 function confetti(){
   for(let i=0;i<30;i++){
     const c=document.createElement("div");

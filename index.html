@@ -5,7 +5,6 @@
 <title>Happy Birthday 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- ฟอนต์ -->
 <link href="https://fonts.googleapis.com/css2?family=Sriracha&family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
@@ -28,21 +27,14 @@ body{
 .card{
   width:100%;
   max-width:560px;
-  background:#ffffffee;
+  background:#ffffff;
   border-radius:28px;
-  padding:26px;
-  box-shadow:0 20px 40px rgba(255,92,138,.25);
+  padding:28px;
+  box-shadow:0 20px 40px rgba(255,92,138,.35);
 }
 .hidden{display:none}
-h1,h2{
-  font-family:'Sriracha', cursive;
-  color:#ff5c8a;
-}
-p{
-  font-family:'Sriracha', cursive;
-  line-height:1.8;
-  color:#ff5c8a;
-}
+h1{font-family:'Sriracha', cursive}
+p{font-family:'Sriracha', cursive; line-height:1.8}
 
 input,button{
   width:100%;
@@ -51,86 +43,75 @@ input,button{
   border:none;
   font-size:1.05em;
   margin-top:12px;
-  font-family:'Sarabun', sans-serif;
 }
 button{
   background:linear-gradient(135deg,#ff9ab3,#ff5c8a);
   color:#fff;
 }
 
-/* ---------- หัวใจลอย ---------- */
+/* หัวใจลอย */
 .heart{
   position:fixed;
   bottom:-20px;
-  font-size:20px;
+  font-size:18px;
   animation:floatUp 6s linear forwards;
   pointer-events:none;
-  opacity:.8;
 }
 @keyframes floatUp{
-  from{transform:translateY(0) scale(1)}
-  to{transform:translateY(-120vh) scale(1.6);opacity:0}
+  to{transform:translateY(-120vh);opacity:0}
 }
 
-/* ---------- รูปซ้อน ---------- */
+/* รูปเลื่อนเอง */
 .stack{
-  position:relative;
-  height:340px;
-  margin:18px 0;
+  display:flex;
+  gap:12px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  margin:22px 0;
 }
 .stack img{
-  position:absolute;
-  top:0;left:0;
-  width:100%;
+  flex:0 0 80%;
+  height:420px;
   border-radius:24px;
-  box-shadow:0 12px 28px rgba(255,92,138,.35);
-  transition:opacity 1.2s ease, transform 1.2s ease;
-}
-.stack img.hidden-img{
-  opacity:0;
-  transform:scale(1.05);
+  object-fit:cover;
+  scroll-snap-align:center;
 }
 
-/* ---------- ของขวัญ ---------- */
+/* ของขวัญ */
 .gift-title{
   font-family:'Sriracha', cursive;
-  font-size:1.9em;
-  margin-top:22px;
+  font-size:2em;
+  margin-top:26px;
 }
 .gift-box{
-  width:300px;
-  max-width:90%;
-  margin:22px auto;
+  width:360px;           /* ใหญ่ขึ้น */
+  max-width:95%;
+  margin:24px auto;
   display:block;
   cursor:pointer;
-  filter:drop-shadow(0 14px 26px rgba(255,92,138,.45));
 }
 .shake{animation:shake .6s}
 @keyframes shake{
-  0%{transform:translateX(0)}
   25%{transform:translateX(-6px)}
   50%{transform:translateX(6px)}
   75%{transform:translateX(-6px)}
-  100%{transform:translateX(0)}
 }
 
-/* ---------- กล่องข้อความ / วิดีโอ ---------- */
+/* กล่อง */
 .note{
-  margin-top:18px;
+  margin-top:20px;
   background:#fff0f6;
-  padding:18px;
+  padding:20px;
   border-radius:22px;
-  color:#ff5c8a;
   font-family:'Sriracha', cursive;
 }
 
-/* ---------- คอนเฟตตี้ ---------- */
+/* คอนเฟตตี้ */
 .confetti{
   position:fixed;
   top:-10px;
   width:8px;
   height:14px;
-  opacity:.9;
   animation:fall 2.5s linear forwards;
 }
 @keyframes fall{
@@ -144,14 +125,14 @@ button{
 <div id="lock" class="wrap">
   <div class="card">
     <h1>ใส่รหัสของเรา 💕</h1>
-    <p>HAPPY</p>
-    <input id="pw" type="password" placeholder="ใส่รหัสผ่าน">
+    <p>H</p>
+    <input id="pw" type="password">
     <button onclick="unlock()">เปิดเซอร์ไพรส์</button>
     <p id="err"></p>
   </div>
 </div>
 
-<!-- หน้าเซอร์ไพรส์ -->
+<!-- หน้าเนื้อหา -->
 <div id="content" class="wrap hidden">
   <div class="card">
     <h1>สุขสันต์วันเกิดนะที่รัก 🎂</h1>
@@ -162,11 +143,13 @@ button{
       แม่งโคตรมีค่าเลย 💖
     </p>
 
-    <!-- รูปซ้อนสไลด์ -->
+    <!-- รูปเลื่อนเอง -->
     <div class="stack">
       <img src="img1.jpg">
-      <img src="img2.jpg" class="hidden-img">
-      <img src="img3.jpg" class="hidden-img">
+      <img src="img2.jpg">
+      <img src="img3.jpg">
+      <img src="img4.jpg">
+      <img src="img5.jpg">
     </div>
 
     <!-- เพลง -->
@@ -182,20 +165,19 @@ button{
       <img src="gift.jpg" style="width:100%;border-radius:18px;">
     </div>
 
-    <!-- กล่องข้อความ -->
+    <!-- วิดีโอ -->
+    <div class="note">
+      <video id="video" width="100%" autoplay muted playsinline style="border-radius:18px;">
+        <source src="video.MP4" type="video/mp4">
+      </video>
+    </div>
+
+    <!-- กล่องข้อความ (ล่างสุด) -->
     <button onclick="toggleNote()">เปิดอ่านข้อความ 💌</button>
     <div id="noteBox" class="note hidden">
       ขอบคุณที่เข้ามาเป็นทุกอย่างในชีวิตกู  
-      ขอให้ปีนี้เป็นปีที่มีความสุขที่สุด
-      และมีกูอยู่ข้างๆ แบบนี้ตลอดไป 💕
-    </div>
-
-    <!-- วิดีโอ (ไฟล์ MP4) -->
-    <div class="note">
-      <video width="100%" controls playsinline style="border-radius:18px;">
-        <source src="video.MP4" type="video/mp4">
-        เบราว์เซอร์ไม่รองรับการเล่นวิดีโอ
-      </video>
+      ขอให้ปีนี้เป็นปีที่มีความสุข  
+      และมีกูอยู่ข้างๆ เสมอ 💕
     </div>
 
   </div>
@@ -204,72 +186,52 @@ button{
 <script>
 const PASSWORD="181205";
 let heartInterval;
-const imgs=document.querySelectorAll(".stack img");
-let i=0,started=false;
 
-/* หัวใจลอยหน้าแรก */
 function startHearts(){
   heartInterval=setInterval(()=>{
     const h=document.createElement("div");
     h.className="heart";
     h.innerText="💗";
     h.style.left=Math.random()*100+"vw";
-    h.style.fontSize=(14+Math.random()*20)+"px";
     document.body.appendChild(h);
     setTimeout(()=>h.remove(),6000);
   },400);
 }
-function stopHearts(){clearInterval(heartInterval);}
+startHearts();
 
-/* ปลดล็อก */
 function unlock(){
   if(pw.value===PASSWORD){
-    stopHearts();
+    clearInterval(heartInterval);
     lock.classList.add("hidden");
     content.classList.remove("hidden");
     music.play().catch(()=>{});
-    if(!started){started=true;startStack();}
+    video.play().catch(()=>{});
   }else err.innerText="รหัสไม่ถูก 😉";
 }
 
-/* รูปซ้อนสไลด์ */
-function startStack(){
-  setInterval(()=>{
-    imgs[i].classList.add("hidden-img");
-    i=(i+1)%imgs.length;
-    imgs[i].classList.remove("hidden-img");
-  },3500);
-}
-
-/* กล่องของขวัญ */
 function openGift(){
   giftBox.classList.add("shake");
   setTimeout(()=>{
     giftBox.classList.remove("shake");
     confetti();
-    giftImg.classList.remove("hidden");
-    setTimeout(()=>giftImg.classList.add("hidden"),3000);
+    giftImg.classList.toggle("hidden");
   },600);
 }
 
-/* กล่องข้อความ */
 function toggleNote(){
   noteBox.classList.toggle("hidden");
 }
 
-/* คอนเฟตตี้ */
 function confetti(){
   for(let i=0;i<30;i++){
     const c=document.createElement("div");
     c.className="confetti";
     c.style.left=Math.random()*100+"vw";
-    c.style.background=["#ff9ab3","#ffd1dc","#ffffff"][Math.floor(Math.random()*3)];
+    c.style.background=["#ff9ab3","#ffd1dc","#fff"][Math.floor(Math.random()*3)];
     document.body.appendChild(c);
     setTimeout(()=>c.remove(),2500);
   }
 }
-
-startHearts();
 </script>
 
 </body>
